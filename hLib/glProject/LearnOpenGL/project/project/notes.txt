@@ -1,0 +1,57 @@
+Notes for myself:
+
+- Run cpp program in vscode via build soln then run without debugging.
+- To avoid opening console window each time along with GLFW window
+	1. Go to Project -> project Properties -> System -> Subsystem -> Windows (/SUBSYSTEM:WINDOWS)
+	2. Go to Advanced and type in mainCRTStartup
+
+- A vector in GLSL has a maximum size of 4 and each of its values can be retrieved via vec.x, vec.y, vec.z and vec.w 
+  respectively where each of them represents a coordinate in space. Note that the vec.w component is not used as a position 
+  in space (we're dealing with 3D, not 4D) but is used for something called perspective division. We'll discuss vectors in 
+  much greater depth in a later chapter.
+
+- For definitions of pointers in C++...
+	ex: const char *varName = "text";
+	 - A string pointed by the pointer should not be changed, because it is located in an read only implementation defined memory.
+	 - Be careful with this because you need to use the strlen() function and not sizeof to find size of the string since the 
+	   sizeof operator will just give you the size of the pointer variable.
+/*
+  * GL_STREAM_DRAW: the data is set only once and used by the GPU at most a few times.
+  * GL_STATIC_DRAW: the data is set only once and used many times.
+  * GL_DYNAMIC_DRAW: the data is changed a lot and used many times.
+*/
+
+
+FOR VERTEX SHADER / VERTEX ATTRIBUTE POINTER
+The first parameter specifies which vertex attribute we want to configure. 
+Remember that we specified the location of the position vertex attribute in the vertex shader with layout (location = 0).
+This sets the location of the vertex attribute to 0 and since we want to pass data to this vertex attribute, we pass in 0.
+
+A VAO stores the glBindBuffer calls when the target is GL_ELEMENT_ARRAY_BUFFER.
+This also means it stores its unbind calls so make sure you don't unbind the element array buffer before unbinding your VAO,
+otherwise it doesn't have an EBO configured.
+
+GLSL NOTES
+A vector in GLSL is a 2,3 or 4 component container for any of the basic types just mentioned. 
+They can take the following form (n represents the number of components):
+
+vecn: the default vector of n floats.
+bvecn: a vector of n booleans.
+ivecn: a vector of n integers.
+uvecn: a vector of n unsigned integers.
+dvecn: a vector of n double components.
+
+
+It is also possible to omit the layout (location = 0) specifier and query for the attribute locations in your OpenGL 
+code via glGetAttribLocation, but I'd prefer to set them in the vertex shader. It is easier to understand and saves you 
+(and OpenGL) some work.
+
+TEXTURES
+To solve this issue OpenGL uses a concept called mipmaps that is basically a collection of texture images where each 
+subsequent texture is twice as small compared to the previous one. The idea behind mipmaps should be easy to understand: 
+after a certain distance threshold from the viewer, OpenGL will use a different mipmap texture that best suits the distance to the object.
+Because the object is far away, the smaller resolution will not be noticeable to the user. OpenGL is then able to sample the correct 
+texels, and there's less cache memory involved when sampling that part of the mipmaps.
+
+Creating a collection of mipmapped textures for each texture image is cumbersome to do manually, but luckily OpenGL is able to 
+do all the work for us with a single call to glGenerateMipmap after we've created a texture.
