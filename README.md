@@ -13,4 +13,4 @@ A function from the Cubemaps chapter called `loadCubemap` is also referenced dir
 # Final Rendering
 ![](https://github.com/dhodzic1/StarTrekOpenGL/blob/main/enterprise.gif)
 
-This can be executed via its project.exe file.
+Clone this repo to your local machine via `git clone` and run the `project.exe` file. This should be located in the x64/Debug folder.
