@@ -4,9 +4,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <C:\hLib\glProject\LearnOpenGL\project\shader_s.h>
-#include <C:\hLib\glProject\LearnOpenGL\project\model.h>
-#include <C:\hLib\glProject\LearnOpenGL\project\camera.h>
+#include <C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/shader_s.h>
+#include <C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/model.h>
+#include <C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/camera.h>
 
 #include <iostream>
 
@@ -30,6 +30,9 @@ bool firstMouse = true;
 // timing
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
+
+// lighting
+glm::vec3 lightPos(4.0f, 0.0f, 4.0f);
 
 int main()
 {
@@ -78,13 +81,14 @@ int main()
     
     // build and compile our shaders
     // ------------------------------------
-    Shader ourShader("C:/hLib/glProject/LearnOpenGL/project/shader.vs", "C:/hLib/glProject/LearnOpenGL/project/shader.fs");
-    Shader skyboxShader("C:/hLib/glProject/LearnOpenGL/project/skybox.vs", "C:/hLib/glProject/LearnOpenGL/project/skybox.fs");
+    Shader ourShader("C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/shader.vs", "C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/shader.fs");
+    Shader skyboxShader("C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/skybox.vs", "C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/skybox.fs");
 
     // load model
     // -----------
-    Model ourModel("C:/hLib/glProject/LearnOpenGL/project/models/ussent/enterprise.obj");
+    Model ourModel("C:/Users/daria/OneDrive/Desktop/StarTrekOpenGL/hLib/glProject/LearnOpenGL/project/models/ussent/enterprise.obj");
 
+    // set up vertex data (and buffer(s)) and configure vertex attributes
     // skybox vertices
     float skyboxVertices[] = {
         // positions          
@@ -207,7 +211,7 @@ int main()
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        //model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// scale down if needed
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
 
