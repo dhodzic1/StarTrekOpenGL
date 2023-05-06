@@ -1,8 +1,7 @@
 # StarTrekOpenGL with C++
 
 This project utilizes the following model:
-https://sketchfab.com/3d-models/uss-enterprise-d-star-trek-tng-e3118c97914342b3ad7dd957c4
-b4ce4e
+https://sketchfab.com/3d-models/uss-enterprise-d-star-trek-tng-e3118c97914342b3ad7dd957c4b4ce4e
 
 The skybox was created using a cubemap in OpenGL. Here is the link for the corresponding textures for each face of the cubemap:
 https://opengameart.org/content/space-skyboxes-0
